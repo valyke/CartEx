@@ -7,10 +7,17 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+// Added modules
+var mongoose = require('mongoose');
+
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+
+// Mongoose Connection
+mongoose.Promise = global.Promise;
+mongoose.connect('localhost:27017/cartex');
 
 // EJS Mate engine
 app.engine('ejs', engine);
