@@ -10,11 +10,14 @@ var bodyParser = require('body-parser');
 // Added modules
 var mongoose = require('mongoose');
 var session = require('express-session');
+var flash = require('connect-flash');
+var passport = require('passport');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+require('./config/passport');
 
 // Mongoose Connection
 mongoose.Promise = global.Promise;
@@ -33,7 +36,10 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session({ secret: 'secret123', resave: false, savedInitialize: false }));
+app.use(session({ secret: 'secret123', resave: false, saveUninitialized: false }));
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
