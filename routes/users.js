@@ -20,8 +20,8 @@ router.get('/signup', function(req, res, next) {
 });
 
 router.post('/signup', passport.authenticate('local.signup', {
-	successRedirect: '/users/',
-	failureRedirect: '/users/signup',
+	successRedirect: '/user/',
+	failureRedirect: '/user/signup',
 	failureFlash: true
 }));
 
@@ -33,11 +33,13 @@ router.get('/signin', function(req, res, next) {
 });
 
 router.post('/signin', passport.authenticate('local.signin', {
-	successRedirect: '/users/',
-	failureRedirect: '/users/signin',
+	successRedirect: '/user/',
+	failureRedirect: '/user/signin',
 	failureFlash: true
 
 }));
+
+
 
 
 
