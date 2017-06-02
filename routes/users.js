@@ -9,7 +9,7 @@ var passport = require('passport');
 router.use(csrfProtection);
 
 // User profile
-router.get('/', function(req, res, next) {
+router.get('/profile', function(req, res, next) {
   res.render('user/profile', {});
 });
 
@@ -20,7 +20,7 @@ router.get('/signup', function(req, res, next) {
 });
 
 router.post('/signup', passport.authenticate('local.signup', {
-	successRedirect: '/user/',
+	successRedirect: '/user/profile',
 	failureRedirect: '/user/signup',
 	failureFlash: true
 }));
@@ -33,13 +33,17 @@ router.get('/signin', function(req, res, next) {
 });
 
 router.post('/signin', passport.authenticate('local.signin', {
-	successRedirect: '/user/',
+	successRedirect: '/user/profile',
 	failureRedirect: '/user/signin',
 	failureFlash: true
 
 }));
 
-
+// User Logout
+router.get('/logout', function(req, res, next) {
+	req.logout();
+	res.redirect('/');
+});
 
 
 
